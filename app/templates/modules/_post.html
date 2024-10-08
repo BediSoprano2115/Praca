@@ -1,0 +1,48 @@
+<style>
+.tag, .date {
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5); /* Optional: background for better readability */
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.tag {
+  top: 10px;
+  left: 10px;
+}
+
+.date {
+  top: 10px;
+  right: 10px;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 5px; /* Space between title and description */
+  font-size: medium;
+  display: inline-block;
+}
+
+.description {
+  font-weight: 500;
+  margin: 0;
+}
+</style>
+
+
+<a href="{{ url_for('single_post', post_id=post.id) }}">
+    <div class="image-container">
+      <span class="tag">{{ post.category_names | join(', ') or 'No Categories' }}</span>
+      <span class="date">{{ post.formatted_publish_date }}</span>
+    <img src="{{post.featuredImage}}" alt="Post Image">
+  </div>
+</a>
+  
+<div class="card-body">
+    <a href="{{ url_for('single_post', post_id=post.id) }}">
+        <h3 class="title">{{post.htmlTitle}}</h3>
+    </a>
+    <p class="description">{{post.metaDescription}}</p>
+</div>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcoiris Rainbow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMWqj2wZ9iX3M2sLZhpvS4hcz6F3hQo3T8F2b9" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: #333;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-weight: 700;
+        }
+
+        .search-container {
+            display: flex;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            background-color: #fff;
+            color: #333;
+            outline: none;
+            width: 220px;
+            transition: width 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            width: 300px;
+        }
+
+        .search-button {
+            background-color: #1e1e1e;
+            border: none;
+            padding: 8px 15px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            margin-left: 10px;
+        }
+
+        .search-button:hover {
+            background-color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .main-post {
+            flex: 3;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            margin-right: 20px;
+        }
+
+        .main-post h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .main-post img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .main-post p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .comments {
+            flex: 1.5;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            position: sticky; /* Make it sticky */
+            top: 20px; /* Distance from the top of the viewport */
+            align-self: flex-start;
+        }
+
+        .comments h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .comment-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .comment-form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .comment-button {
+            background-color: #28a745;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            margin-left: 10px;
+        }
+
+        .comment-button:hover {
+            background-color: #218838;
+        }
+
+        .hubspot-posts {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .hubspot-posts h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .related-post-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .related-post {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 10px;
+            width: 20%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin: 10px;
+        }
+
+        .related-post h3 {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .related-post img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 12px;
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .footer h3 {
+            margin-top: 0;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .footer-link {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #0056b3;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #555;
+            color: white;
+            margin: 0 10px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background-color: #777;
+        }
+
+        .social-icons a i {
+            font-size: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+            font-size: 14px;
+        }
+
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .like-btn {
+            color: gray;
+            transition: color 0.3s ease;
+        }
+
+        .like-btn.liked {
+            color: #007bff;
+        }
+
+        .tag {
+            background-color: #dcdcdc;
+            color: #333;
+        }
+        .tags-section {
+            margin-top: 20px; /* Space above the tags */
+        }
+
+        .tag-list {
+            display: flex; /* Use flexbox to arrange tags horizontally */
+            flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+            padding: 0; /* Remove default padding */
+            list-style-type: none; /* Remove bullet points */
+        }
+
+        .tag-list li {
+            margin-right: 10px; /* Space between tags */
+            margin-bottom: 10px; /* Space below tags for wrapping */
+        }
+
+        .tag-list li a {
+            background-color: #dcdcdc; /* Tag background color */
+            color: #333; /* Tag text color */
+            padding: 5px 10px; /* Padding for the tag */
+            border-radius: 25px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .tag-list li a:hover {
+            background-color: #007bff; /* Change color on hover */
+            color: white; /* Text color change on hover */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="{{ url_for('blog') }}" class="header-link">
+            <div class="header-title">ARCOIRIS RAINBOW</div>
+        </a>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <button class="search-button">🔍</button>
+        </div>
+    </div>
+
+    <div class="container">
+       <!-- Main Post Section -->
+        <div class="main-post">
+            <h1>{{ data.name | safe }}</h1>
+            <img src="{{ data.featuredImage | safe }}" alt="{{ data.name | safe }}" class="post-image">
+            <div>
+                {{ content | safe }}  <!-- Render cleaned content as HTML -->
+            </div>
+            <div class="post-content">
+                <!-- Post content -->
+                <p>{{ data | safe }}</p>
+                
+                <!-- Tags section -->
+                <div class="tags-section">
+                    <p>Tags:</p>
+                    <ul class="tag-list">
+                        {% if tags %}
+                            {% for tag in tags %}
+                                <li><a href="/blog?filter={{ tag.id }}">{{ tag }}</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li>No tags available.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>    
+        </div>
+        <!-- Comments Section -->
+        <div class="comments">
+            <h3>Comments</h3>
+            <div id="comment-list">
+                <div class="comment">
+                    User1: This is a great site! 
+                    <span class="like-btn" onclick="toggleLike(this)">👍 <span class="like-count">0</span></span>
+                </div>
+                <div class="comment">
+                    User2: I love the layout! 
+                    <span class="like-btn" onclick="toggleLike(this)">👍 <span class="like-count">0</span></span>
+                </div>
+                <!-- Additional comments can be added here -->
+            </div>
+            <div class="comment-form">
+                <input type="text" id="comment-input" placeholder="Add a comment...">
+                <button class="comment-button" onclick="addComment()">Add</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="hubspot-posts">
+        <h2>Latest Posts:</h2>
+        <div id="hubspot-posts-container" class="related-post-container">
+            <!-- Render latest posts -->
+            {% if latest_posts %}
+                {% for post in latest_posts %}
+                <div class="related-post">
+                    <a href="/post/{{ post.get('id') }}" class="related-post-link">
+                    <h3>{{ post.get('name', 'No title available') }}</h3>
+                    <img src="{{ post.get('featuredImage', 'path/to/default/image.jpg') }}" alt="{{ post.get('name', 'No title available') }}">
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts available.</p>
+            {% endif %}
+        </div>
+    </div>
+   <!-- Footer Section -->
+    <div class="footer">
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:info@example.com" class="footer-link">info@example.com</a></p>
+                <p>Phone: <a href="tel:+11234567890" class="footer-link">(123) 456-7890</a></p>
+            </div>
+            <div class="social-icons">
+                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Arcoiris Rainbow. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>   
+    // Call the function when the page loads
+    fetchTagsFromHubSpot();
+        function addComment() {
+            const commentInput = document.getElementById("comment-input");
+            const commentText = commentInput.value.trim();
+
+            if (commentText !== "") {
+                const commentList = document.getElementById("comment-list");
+                const newComment = document.createElement("div");
+                newComment.className = "comment";
+                // Include the like button in the new comment
+                newComment.innerHTML = `You: ${commentText} <span class="like-btn" onclick="toggleLike(this)">👍 <span class="like-count">0</span></span>`;
+                newComment.dataset.liked = "false"; // Track if the comment is liked
+                commentList.appendChild(newComment);
+                commentInput.value = ""; // Clear input after adding comment
+            }
+        }
+
+        function toggleLike(likeBtn) {
+            const likeCount = likeBtn.querySelector(".like-count");
+            const currentCount = parseInt(likeCount.textContent, 10);
+            const commentDiv = likeBtn.closest(".comment"); // Get the closest comment div
+            const isLiked = commentDiv.dataset.liked === "true"; // Check if already liked
+
+            if (isLiked) {
+                // If already liked, decrement the count and change to unliked state
+                likeCount.textContent = currentCount - 1;
+                commentDiv.dataset.liked = "false"; // Update state
+                likeBtn.classList.remove('liked'); // Remove liked class
+            } else {
+                // If not liked, increment the count and change to liked state
+                likeCount.textContent = currentCount + 1;
+                commentDiv.dataset.liked = "true"; // Update state
+                likeBtn.classList.add('liked'); // Add liked class
+            }
+        }
+    </script>
+</body>
+</html>

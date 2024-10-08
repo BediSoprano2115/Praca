@@ -1,0 +1,641 @@
+{% extends "base.html" %}
+  
+  {% block title %}Animaciones Arcoiris{% endblock %}
+
+  
+  {% block css %}
+  <!-- Favicons -->
+  <link href={{url_for("static", filename="vendor/bootstrap/css/bootstrap.min.css")}} rel="stylesheet">
+  <link href={{url_for("static", filename="vendor/bootstrap-icons/bootstrap-icons.css")}} rel="stylesheet">
+  <link href={{url_for("static", filename="vendor/aos/aos.css")}} rel="stylesheet">
+  <link href={{url_for("static", filename="vendor/swiper/swiper-bundle.min.css")}} rel="stylesheet">
+  <link href={{url_for("static", filename="vendor/glightbox/css/glightbox.min.css")}} rel="stylesheet">
+  
+  <link href={{url_for("static", filename="css/main.css")}} rel="stylesheet">
+  
+  <link href={{url_for("static", filename="img/favicon2.png")}} rel="icon">
+  <link href={{url_for("static", filename="img/apple-touch-icon.png")}} rel="apple-touch-icon>
+  
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+
+  <style>
+    /* Container to center the carousel */
+    .carousel-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .carousel {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .carousel-container.active {
+      display: flex;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 50px; /* Adjust size */
+      height: 50px; /* Adjust size */
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+      border-radius: 50%; /* Circular shape */
+      display: flex; /* Center the icon */
+      align-items: center; /* Center vertically */
+      justify-content: center; /* Center horizontally */
+      color: white; /* Icon color */
+      font-size: 24px; /* Icon size */
+      z-index: 10; /* Ensure it stays on top */
+      position: absolute; /* Position relative to carousel container */
+      top: 50%; /* Center vertically */
+      transform: translateY(-50%); /* Adjust for exact centering */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: transparent; /* No background color */
+      font-size: 24px; /* Ensure consistent icon size */
+    }
+
+    .carousel-control-prev {
+      left: -100px;
+    }
+
+    .carousel-control-next {
+      right: -100px;
+    }
+
+    .carousel-indicators {
+      bottom: 10px;
+    }
+
+    .carousel-indicators li {
+      background-color: #000;
+    }
+
+    .carousel-indicators .active {
+      background-color: #fff;
+    }
+
+    
+  </style>
+
+  {% endblock %}
+
+  {% block other_header_items %}
+    <a class="btn-getstarted" href={{url_for("request_services")}}>¿Necesitas ayuda?</a>
+  {% endblock %}
+
+  {% block head_scripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Initially show all items
+        $('.carousel-container').addClass('active');
+
+        // Handle filter clicks
+        $('.portfolio-filters li').on('click', function() {
+          var filterValue = $(this).data('filter');
+          $('.portfolio-filters li').removeClass('filter-active');
+          $(this).addClass('filter-active');
+          $('.carousel-container').removeClass('active');
+
+          if (filterValue === '*') {
+            // Show all items
+            $('.carousel-container').addClass('active');
+          } else {
+            // Show filtered items
+            $(filterValue).addClass('active');
+          }
+        });
+      });
+    </script>
+
+
+    <script async defer src="//www.instagram.com/embed.js"></script>
+  {% endblock %}
+
+  {% block header_nav_items %}
+    <li><a href="#hero" class="active">Home<br></a></li>
+    <li><a href="#uno">Sobre</a></li>
+    <li><a href="#dos">Servicios</a></li>
+    <li><a href="#tres">Galería</a></li>
+    <li><a href="#sinco">Contacto</a></li>
+            
+    <li class="dropdown"><a href="#"><span>Más</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+      <ul>
+        <li><a href={{url_for("products")}}>Tienda</a></li>
+        <li><a href={{url_for("blog")}}>Blog</a></li>
+      </ul>
+    </li>
+  {% endblock %}
+    
+  {% block bodyClass %}"index-page"{% endblock %}
+  
+  {% block content %}
+  <main class="main">
+    <div id="preloader"></div>
+  <!-- Hero Section -->
+  <section id="hero" class="hero section dark-background">
+
+    <img src={{url_for("static", filename="img/hero-bg.png")}} alt="" data-aos="fade-in">
+
+    <div class="container">
+
+      <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-xl-6 col-lg-8">
+          <h2>  <span>Confía en los profesionales</span></h2>
+          <p>Animaciones Arcoiris</p>
+        </div>
+      </div>
+
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-box">
+            <i class="bi bi-info-circle"></i>
+            <h3><a href="{{ url_for ("index") }}"><a href="#uno">
+              ¿Qué hacemos?</a></h3></a>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="icon-box">
+            <i class="bi bi-bullseye"></i>
+            <h3><a href=""><a href="#dos">Nuestros servicios</a></h3></a>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="icon-box">
+            <i class="bi bi-camera"></i>
+            <h3><a href=""><a href="#tres">Reportajes fotográficos</a></h3></a>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="icon-box">
+            <i class="bi bi-card-list"></i>
+            <h3><a href=""><a href="#quatro">Nuestras estadisticas</a></h3></a>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="700">
+          <div class="icon-box">
+            <i class="bi bi-telephone"></i>
+            <h3><a href=""><a href="#sinco">¡Contáctanos!</a></h3></a>
+          </div>
+        </div>
+        <div id="uno"></div>
+      </div>
+    </div>
+  </div>
+</section><!-- /Hero Section -->
+
+  <!-- About Section -->
+  <section id="about" class="about section">
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src={{url_for("static", filename="img/image_uno.jpg")}} class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 order-2 order-lg-1 content">
+          <h3>¿Las mejores animaciones?</h3>
+            <h3>¡Sí, somos nosotros!</h3><!--<div id="uno"></div> -->
+            <h6 class="fst-Ubuntu;">
+              Organizamos animaciones para niños de todas las edades en todos los eventos especiales.
+            </h6>
+            <ul>
+              <li><i class="bi bi-check2-all"></i> <span>Animaciones Arcoiris es una empresa fiable y contrastada que ofrece servicios de animación infantil en Sevilla al más alto nivel.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Haz lo que te dé más satisfacción en la vida. Para muchos, este es un eslogan sin sentido, pero no para nuestros animadores</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Organizamos animaciones y eventos especiales de la más alta calidad. Nos destacamos en el mercado con muchos años de experiencia, gran creatividad y garantía de gran diversión.</span></li>
+            </ul>
+            <p>
+              El premio más valioso para nosotros es la plena satisfacción de los participantes y de los padres, así como la sonrisa de los niños.
+            </p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- /About Section -->
+
+  <!-- Features Section -->
+  <section id="features" class="features section">
+
+    <div class="container">
+
+      <div class="row gy-4">
+        <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src={{url_for("static", filename="img/image_dos.jpg")}} alt=""></div>
+        <div class="col-lg-6">
+
+          <div class="features-item d-flex ps-0 ps-lg-3 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="200">
+            <i class="bi bi-music-note flex-shrink-0"></i>
+            <div>
+              <h4>Trabajar en equipo</h4>
+              <p>Colaboramos juntos para crear momentos inolvidables, asegurándonos de que cada actividad esté llena de alegría y creatividad.</p>
+            </div>
+          </div><!-- End Features Item-->
+
+          <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <i class="bi bi-cake2 flex-shrink-0"></i>
+            <div>
+              <h4>Diversión y creatividad</h4>
+              <p>Exploramos un mundo lleno de imaginación y color, donde cada niño puede expresarse a través del arte y la diversión.</p>
+            </div>
+          </div><!-- End Features Item-->
+
+          <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="400">
+            <i class="bi bi-broadcast flex-shrink-0"></i>
+            <div>
+              <h4>Momentos de aprendizaje</h4>
+              <p>Aprendemos jugando y descubrimos nuevas formas de ver el mundo mientras desarrollamos nuestras habilidades y talentos.</p>
+            </div>
+          </div><!-- End Features Item-->
+
+          <div class="features-item d-flex mt-5 ps-0 ps-lg-3" data-aos="fade-up" data-aos-delay="500">
+            <i class="bi bi-camera-reels flex-shrink-0"></i>
+            <div>
+              <h4>Celebraciones auténticas</h4>
+              <p>Disfrutamos de fiestas inolvidables que crean recuerdos felices para siempre, rodeados de amigos y familias.</p>
+            </div>
+          </div><!-- End Features Item-->
+
+        </div>
+      </div>
+
+    </div>
+
+  </section><!-- /Features Section -->
+
+  <!-- Services Section -->
+  <section id="services" class="services section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Servicios</h2><section id="dos"></section>
+      <p>Consulte nuestros servicios</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-activity"></i>
+            </div>
+              <h3>Animaciones Creativas</h3>
+            <p>Creamos experiencias mágicas para niños, con animaciones llenas de creatividad y diversión. ¡Nos aseguramos de que cada evento sea inolvidable!</p>
+          </div>
+        </div><!-- End Service Item -->
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-broadcast"></i>
+            </div>
+              <h3>Juegos Interactivos</h3>
+            <p>Ofrecemos juegos interactivos que despiertan la imaginación y mantienen a los niños entretenidos y felices durante todo el evento.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-easel"></i>
+            </div>
+              <h3>Talleres Divertidos</h3>
+            <p>Nuestros talleres están diseñados para que los niños aprendan jugando. Creatividad, manualidades y diversión en cada actividad.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-bounding-box-circles"></i>
+            </div>
+              <h3>Actividades al Aire Libre</h3>
+            <p>Organizamos dinámicas y juegos al aire libre que garantizan horas de entretenimiento activo y seguro para los más pequeños.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-calendar4-week"></i>
+            </div>
+              <h3>Fiestas Temáticas</h3>
+            <p>Hacemos realidad las fiestas temáticas soñadas por los niños, desde superhéroes hasta cuentos de hadas. ¡Diversión garantizada!</p>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-chat-square-text"></i>
+            </div>
+              <h3>Shows de Animación</h3>
+            <p>Presentamos shows de animación adaptados a las edades y gustos de los niños, con personajes encantadores y actuaciones emocionantes.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<section id="portfolio" class="portfolio section">
+<span id="tres"></span>
+<div class="container section-title" data-aos="fade-up">
+  <h2>Galería de fotos</h2>
+  <p>¡Mira nuestra galería!</p>
+  <hr>  </div>
+
+<div class="container">
+  <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+    <li data-filter="*" class="filter-active">Todo</li>
+    <li data-filter=".filter-images">Fotos</li>
+    <li data-filter=".filter-videos">Vídeos</li>
+  </ul>
+  
+     <div class="carousel-container filter-images">
+      <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselImages" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#carouselImages" data-bs-slide-to="1"></li>
+          <li data-bs-target="#carouselImages" data-bs-slide-to="2"></li>
+          <li data-bs-target="#carouselImages" data-bs-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CxtKPess5qf/?utm_source=ig_web_copy_link" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/p/POST_ID_1/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+    
+    <div class="carousel-item">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C6HLlq3sM6v/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/p/POST_ID_2/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+
+    <!-- Instagram Post 3 -->
+    <div class="carousel-item">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CxQN7dVMGyx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/p/POST_ID_3/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+
+    <div class="carousel-item">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C3din3iMdTq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/p/POST_ID_4/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselImages" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselImages" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+  <br><hr><br>
+</div>
+</div>
+
+<div class="carousel-container filter-videos">
+<div id="carouselVideos" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#carouselVideos" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselVideos" data-bs-slide-to="1"></li>
+    <li data-bs-target="#carouselVideos" data-bs-slide-to="2"></li>
+    <li data-bs-target="#carouselVideos" data-bs-slide-to="3"></li>
+  </ol>
+  <div class="carousel-inner">
+    
+    <div class="carousel-item active">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C7bcxL_MuJj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/reel/CxtKPess5qf/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+
+    <div class="carousel-item">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C-2V8wqstzx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14">
+        <div style="padding:16px;">
+          <a href="https://www.instagram.com/reel/XYZ123/" style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="background-color: #F4F4F4; border-radius: 4px; height: 140px; width: 140px;"></div>
+              <div style="padding: 19% 0;"></div>
+            </div>
+          </a>
+        </div>
+      </blockquote>
+    </div>
+
+  </div>
+  <a class="carousel-control-prev" href="#carouselVideos" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselVideos" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+</div>
+</div>
+</section>
+  
+    </div>
+  </section>
+
+  <section id="stats" class="stats section">
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row gy-4 align-items-center justify-content-between">
+
+        <div class="col-lg-5">
+          <img src={{url_for("static", filename="img/image_quatro.jpg")}} alt="" class="img-fluid">
+        </div>
+        <div class="col-lg-6">
+
+          <h3 class="fw-bold fs-2 mb-3" id="quatro">Nuestras estadísticas</h3>
+          <p class="mb-3">Sobre lo que hemos hecho durante nuestras actividades a lo largo de los años</p>
+          
+
+          <div class="row gy-4">
+
+            <div class="col-lg-6">
+              <div class="stats-item d-flex">
+                <i class="bi bi-emoji-smile flex-shrink-0"></i>
+                <div>
+                  <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                  <p><strong> Número de clientes satisfechos </strong>  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="stats-item d-flex">
+                <i class="bi bi-journal-richtext flex-shrink-0"></i>
+                <div>
+                  <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                  <p><strong> Proyectos completados </strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="stats-item d-flex">
+                <i class="bi bi-headset flex-shrink-0"></i>
+                <div>
+                  <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+                  <p><strong> Horas de soporte proporcionadas </strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="stats-item d-flex">
+                <i class="bi bi-people flex-shrink-0"></i>
+                <div>
+                  <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+                  <p><strong> Nuestros empleados </strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="call-to-action" class="call-to-action section dark-background">
+
+    <img src={{url_for("static", filename="img/image_tres.jpg")}} alt="">
+
+    <div class="container">
+      <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-xl-10">
+          <div class="text-center">
+            <h2>¿Ya se ha decidido?</h2>
+            <p></p>
+            <a class="cta-btn" href="#"><h4>Volver al inicio de la página </h4></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="services" class="services section">
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+      <h2 id="sinco">Contacto</h2>
+      <p>Contacto</p>
+    </div>
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-6 col-md-6 aos-init aos-animate clients2" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi bi-telephone"></i>
+            </div>
+              <h4>Llámanos</h4>
+              <h6>Marta: +34 614 180 138</h6>
+              <h6>India: +34 614 181 809</h6>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 aos-init aos-animate clients2" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-item position-relative d-flex flex-column flex-wrap">
+            <div class="icon">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <h4>Envíenos un correo electrónico</h4>
+            <h6 class="text-wrap">animacionesarcoirismi@gmail.com</h6>
+          </div>
+        </div>              
+      </div>
+    </div>
+  </section>
+  
+  </main> 
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    {% endblock %}
+
+  {% block footer_links %}
+  <h4>Enlaces útiles</h4>
+    <ul>
+      <li><i class="bi bi-chevron-right"></i> <a href="#hero"> Home</a></li>
+      <li><i class="bi bi-chevron-right"></i> <a href="#uno"> Sobre</a></li>
+      <li><i class="bi bi-chevron-right"></i> <a href="#dos"> Servicios</a></li>
+      <li><i class="bi bi-chevron-right"></i> <a href="#tres"> Galería</a></li>
+      <li><i class="bi bi-chevron-right"></i> <a href="#sinco"> Contacto</a></li>
+    </ul>
+  {% endblock %}
+
+
+  {% block scripts %}
+    <!-- Vendor JS Files -->
+    <script src={{url_for("static", filename="vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
+    <script src={{url_for("static", filename="vendor/aos/aos.js")}}></script>
+    <script src={{url_for("static", filename="vendor/swiper/swiper-bundle.min.js")}}></script>
+    <script src={{url_for("static", filename="vendor/glightbox/js/glightbox.min.js")}}></script>
+    <script src={{url_for("static", filename="vendor/imagesloaded/imagesloaded.pkgd.min.js")}}></script>
+    <script src={{url_for("static", filename="vendor/isotope-layout/isotope.pkgd.min.js")}}></script>
+    <script src={{url_for("static", filename="vendor/purecounter/purecounter_vanilla.js")}}></script>
+    
+    <!-- Main JS File -->
+    <script src={{url_for("static", filename="js/main.js")}}></script>
+
+
+
+    
+    
+    
+
+    
+  {% endblock %}
+                

@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+<!-- CSS for products page -->
+{% block css %}
+    <link href={{url_for("static", filename="img/favicon.png")}} rel="icon">
+    <link href={{url_for("static", filename="img/apple-touch-icon.png")}} rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href={{url_for("static", filename="vendor/bootstrap/css/bootstrap.min.css")}} rel="stylesheet">
+    <link href={{url_for("static", filename="vendor/bootstrap-icons/bootstrap-icons.css")}} rel="stylesheet">
+    <link href={{url_for("static", filename="vendor/aos/aos.css")}} rel="stylesheet">
+    <link href={{url_for("static", filename="vendor/swiper/swiper-bundle.min.css")}} rel="stylesheet">
+    <link href={{url_for("static", filename="vendor/glightbox/css/glightbox.min.css")}} rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href={{url_for("static", filename="css/main.css")}} rel="stylesheet">
+
+    <style>
+        /* Fix for header and navigation bar overlap */
+        .navbar {
+            position: relative;
+            z-index: 1000;
+        }
+
+        header {
+            padding-top: 120px; /* Adjust the padding to push content below the header */
+        }
+
+        /* Główny kontener podziału strony */
+        .container-grid {
+            display: grid;
+            grid-template-columns: 76% 24%; /* Dzieli na 76% i 24% */
+            gap: 20px; /* Odstęp między kolumnami */
+            padding: 20px;
+        }
+
+        /* Główna zawartość bloga */
+        .main-content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 0px; /* Rounded corners */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border: 1px solid #DDDDDD;
+        }
+
+        /* Zabezpieczenie przed zasłanianiem zawartości przez nagłówek */
+        .album {
+            padding-top: 120px; /* Dodanie odstępu, aby zawartość nie chowała się pod nagłówkiem */
+        }
+
+        /* Sidebar na tagi i wyszukiwarkę */
+        .sidebar {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styl dla tagów w formie listy */
+        .tag-list {
+            list-style-type: none; /* Usunięcie domyślnego stylu listy */
+            padding: 0;
+        }
+
+        .tag-list li {
+            margin-bottom: 10px;
+        }
+
+        .tag-list li a {
+            text-decoration: none;
+            color: #007bff; /* Bootstrap primary color */
+        }
+
+        .tag-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .filter-search-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .filter-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .filter-form select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* Wyszukiwanie - element po prawej stronie */
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .search-form input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: orange;
+            border: none;
+            color: black;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background-color: darkorange;
+            color: white;
+        }
+
+        /* Dostosowanie na mniejszych ekranach */
+        @media (max-width: 768px) {
+            .container-grid {
+                grid-template-columns: 1fr; /* Na mniejszych ekranach pełna szerokość */
+            }
+
+            .sidebar {
+                margin-top: 10%; /* Odstęp między główną zawartością a paskiem bocznym */
+            }
+        }
+
+        .page_top {
+            height: 10%;
+        }
+        #tags{
+            margin: 10px;
+        }
+
+        .album, body, .main-content {
+            background-color: #FFFFFF !important;
+        }
+
+        .album {
+            padding-top: 0% !important;
+            margin-top: 0% !important;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .custom-post-layout {
+                flex-direction: column;
+            }
+
+            .custom-post-layout .large-post, 
+            .custom-post-layout .smaller-posts {
+                flex: 1 100%; /* Both large and smaller posts will take full width */
+            }
+
+            .custom-post-layout .smaller-posts .row {
+                margin-bottom: 20px; /* Space between stacked posts */
+            }
+        }
+
+    .btn-all-posts {
+        float: right;
+        font-size: 0.9rem; /* Mniejsza czcionka dla lepszego dopasowania */
+        padding: 8px 16px; /* Mniejsze paddingi dla lepszego dopasowania */
+        background-color: #007bff; /* Kolor przycisku */
+        color: white; /* Kolor tekstu */
+        border: none; /* Usunięcie obramowania */
+        border-radius: 5px; /* Zaokrąglenie rogów */
+        transition: background-color 0.3s; /* Efekt przejścia */
+    }
+
+    .btn-all-posts:hover {
+        background-color: #0A58CA;
+        color: white;
+    }
+
+                #tagg {
+                    float: left;
+                    margin-top: 7.5px;
+                }
+
+    /* Large posts in single-column layout */
+    .card.large-post {
+        background-color: #fff;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .card.large-post img {
+        width: 100%;
+        height: 470px; /* Fixed height for smaller post images */
+        object-fit: cover; /* Crop the image to fit without distorting */
+        border-radius: 8px;
+    }
+
+    .card.large-post h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .card.large-post p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* Small posts in two-column layout */
+    .card.small-post {
+        background-color: #fff;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .card.small-post img {
+        width: 100%;
+        height: 250px; /* Fixed height for smaller post images */
+        object-fit: cover; /* Crop the image to fit without distorting */
+        border-radius: 8px;
+    }
+
+    .card.small-post h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .card.small-post p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card.large-post {
+            font-size: 1rem;
+        }
+
+        .card.small-post {
+            font-size: 0.9rem;
+        }
+
+        .col-md-6 {
+            width: 100%; /* Full-width on smaller screens */
+        }
+
+        /* Ensure consistent image scaling on small screens */
+        .card.large-post img,
+        .card.small-post img {
+            height: auto; /* Let the height adjust based on the screen size */
+        }
+    }
+
+.col-md-6, .col-12 {
+    padding: 12px !important;
+}
+
+.col-12 {
+    padding-top: 0px !important;
+} 
+
+.col-md-6:hover, .col-12:hover {
+    display: block;
+    filter: drop-shadow(0px 1px 15px rgba(0, 0, 0, 0.2));
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+</style>
+
+{% endblock %}
+
+{% block header_nav_items %}
+    <li>
+        <a href={{url_for("index")}}>
+            <i class="bi bi-house-fill me-2 fs-6 custom-icon"></i> Home
+        </a>
+    </li>
+    <li>
+        <a href={{url_for("products")}}>
+            <i class="bi bi-cart-fill me-2 fs-6 custom-icon"></i> Services
+        </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<section class="page_top">
+
+</section>
+<div class="container-grid">
+    <!-- Main content (76%) -->
+    <div class="main-content">
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+                <!-- Blog post cards -->
+                <div class="row">
+                    {% set filter = request.args.get('filter') %}
+                    {% if filter %}
+                        {% set filter = filter | int %}
+                        <!-- Loop through posts with filtering -->
+                        {% for post in blog %}
+                            {% if filter in post.tagIds %}
+                                <!-- First post (large one) -->
+                                {% if loop.index == 1 %}
+                                    <div class="col-12">
+                                        <div class="card large-post">
+                                            {% include "modules/_post.html" %}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <!-- Remaining posts in two columns -->
+                                    <div class="col-md-6">
+                                        <div class="card small-post">
+                                            {% include "modules/_post.html" %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <!-- Loop through all posts -->
+                        {% for post in blog %}
+                            <!-- First post (large one) -->
+                            {% if loop.index == 1 %}
+                                <div class="col-12">
+                                    <div class="card large-post">
+                                        {% include "modules/_post.html" %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <!-- Remaining posts in two columns -->
+                                <div class="col-md-6">
+                                    <div class="card small-post">
+                                        {% include "modules/_post.html" %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Blog pagination">
+            <ul class="pagination justify-content-center mt-4">
+                {% if page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('blog', page=page-1, category=request.args.get('category'), search=request.args.get('search')) }}">Previous page</a>
+                    </li>
+                {% endif %}
+                <li class="page-item active">
+                    <span class="page-link">{{ page }}</span>
+                </li>
+                {% if has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('blog', page=page+1, category=request.args.get('category'), search=request.args.get('search')) }}">Next page</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Pasek boczny (24%) -->
+    <div class="sidebar">
+        <!-- Filter and search bar -->
+        <div class="filter-search-container">
+            <!-- Pasek wyszukiwania -->
+            <form method="GET" action="{{ url_for('blog') }}" class="search-form">
+                <input type="text" name="search" id="search" class="form-control" value="{{ search_query }}" placeholder="Search posts...">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+            <br><hr>
+
+            <!-- Lista tagów -->
+                <div id="tags">
+                    <p id="tagg">TAGS:</p>
+                    <a href="{{ url_for('blog') }}" class="btn-all-posts">All Posts</a>
+                </div>
+                <form method="get" action="" class="filter-form">
+                    <ul class="tag-list">
+                        {% for tag in tags %}
+                            <li><a href="{{ url_for('blog', filter=tag.id) }}">#{{ tag.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

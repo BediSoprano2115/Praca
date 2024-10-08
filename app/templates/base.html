@@ -1,0 +1,85 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{% block title %}Animaciones Arcoiris{% endblock %}</title>
+      
+      <!-- CSS for base -->
+      {% block css %}{% endblock %}
+      <!-- Main Scripts for base  -->
+      {% block head_scripts %}{% endblock %}
+
+  </head>
+  <body class={% block bodyClass %} {% endblock %}>
+    <!-- 
+    partial template for a website header, defines a layout for the header , including a logo link and navigation menu items
+    -->
+    
+      {% block header %}
+          <header id="header" class="header d-flex align-items-center fixed-top">
+              <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+              <a href="{{url_for ("index")}}" class="logo d-flex align-items-center me-auto me-lg-0">
+                  <h1 class="sitename">Animaciones Arcoiris</h1>
+                  <span>.</span>
+              </a>
+              <nav id="navmenu" class="navmenu">
+                  <ul>
+                    <!--  navigation  -->
+                  {% block header_nav_items %}
+                      
+                  {% endblock %}
+                  </ul>
+                  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+              </nav>
+              {% block other_header_items %}
+              
+              {% endblock %}
+              </div>
+          </header>
+      {% endblock %}
+      
+      <!-- Main content of the website -->
+
+      {% block content %}
+
+      {% endblock %}
+
+      <!-- defines a footer section for a website, contact information, social media linkss-->
+      {% block footer %}
+      <footer id="footer" class="footer dark-background">
+          <div class="footer-top">
+            <div class="container">
+              <div class="row gy-4">
+                  <div class="col-lg-4 col-md-6 footer-about">
+                  <a href="{{ url_for ("index") }}" class="logo d-flex align-items-center">
+                    <span class="sitename">Animaciones Arcoiris</span>
+                  </a>
+                  <div class="footer-contact pt-3">
+                    <p><strong>Email:</strong> <span><p>animacionesarcoirismi@gmail.com</p></span></p>
+                    <p class="mt-3"><strong>Número de teléfono:</strong> <span><p><b>Marta:</b> +34 614 180 138</p>
+                      <p><b>India:</b> +34 614 181 809</p></span></p>
+                  </div>
+                  <div class="social-links d-flex mt-4">
+                    <a href="https://www.instagram.com/animaciones_arcoiriss/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@arcoirisanimaciones"><i class="bi bi-tiktok"></i></a>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-3 footer-links">
+                  {% block footer_links %}
+
+                  {% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+      </footer>
+      {% endblock %}
+      <!-- Scripts for base -->
+      {% block scripts %}
+
+      {% endblock %}
+      <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/145284639.js"></script>
+  </body>
+  </html>
